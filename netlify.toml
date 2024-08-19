@@ -1,0 +1,42 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+[dev]
+  functions = "netlify/functions"
+  publish = "public"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/auth/google"
+  to = "/.netlify/functions/authCallback"
+  status = 302
+  force = true
+
+
+[[redirects]]
+  from = "/auth/github"
+  to = "/.netlify/functions/githubAuth"
+  status = 302
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    "Access-Control-Allow-Origin" = "*"
+    "Access-Control-Allow-Headers" = "Authorization, Content-Type"
+
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
+
+  [[redirects]]
+  from = "/.netlify/functions/updateUser/:userId"
+  to = "/.netlify/functions/updateUser"
+  status = 200
+  conditions = { method = "PUT" }
+

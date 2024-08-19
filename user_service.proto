@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package user_service;
+
+service UserService {
+    rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+}
+
+message CreateUserRequest {
+    string name = 1;
+    string email = 2;
+    int32 age = 3;
+    string phoneNumber = 4;
+    string address = 5;
+    string role = 6;
+    string referralCode = 7;
+    string token = 8;  // Токен авторизации
+}
+
+message CreateUserResponse {
+    string id = 1;
+    string name = 2;
+    string email = 3;
+    int32 age = 4;
+    string phoneNumber = 5;
+    string address = 6;
+    string role = 7;
+    string referralCode = 8;
+    string status = 9;
+}
+
+message ErrorResponse {
+    string error = 1;
+}
