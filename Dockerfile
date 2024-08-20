@@ -18,13 +18,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Установите grpcio-reflection отдельно
 RUN pip install grpcio-reflection
 
-# Скопируйте остальные файлы
+# Скопируйте остальные файлы, если они есть в корне
 COPY . .
 
-# Команда по умолчанию
-CMD ["python", "app.py"]
-
 # Установите переменную окружения для порта
-ENV PORT 10000
+ENV PORT=10000
 
-
+# Укажите правильный путь к server.py
+CMD ["python", "grpc_services/server.py"]

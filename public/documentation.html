@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Documentation styles */
+        .documentation {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .user-section {
+            background-color: #e3f2fd; /* Light blue for user-related endpoints */
+            border: 1px solid #bbdefb;
+        }
+        .order-section {
+            background-color: #e8f5e9; /* Light green for order-related endpoints */
+            border: 1px solid #c8e6c9;
+        }
+        .review-section {
+            background-color: #fce4ec; /* Light pink for review-related endpoints */
+            border: 1px solid #f8bbd0;
+        }
+        .documentation h2,
+        .documentation h3,
+        .documentation h4 {
+            margin: 20px 0 10px;
+        }
+        .documentation pre {
+            background-color: #eaeaea;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .documentation code {
+            color: #d63384;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 8px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="content" class="content">
+        <div class="documentation">
+            <h2>API Documentation</h2>
+            <p>Welcome to the API documentation page. Here you will find detailed information on how to use the API, including endpoints, parameters, and example requests and responses.</p>
+
+            <h3>BASE URL:</h3>
+            <p><code>https://alexqa.netlify.app/.netlify/</code></p>
+
+            <div class="section user-section">
+                <h3>User Endpoints</h3>
+
+                <h4>1) Create User</h4>
+<p><strong>Endpoint:</strong> <code>/functions/createUser</code><br>
+   <strong>Method:</strong> POST<br>
+   <strong>Headers:</strong><br>
+   &nbsp;&nbsp;&nbsp;Content-Type: application/json<br>
+   &nbsp;&nbsp;&nbsp;Authorization: Bearer &lt;token&gt;<br>
+   <strong>Body:</strong></p>
+<pre><code>{
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "age": 30,
+  "phoneNumber": "+12345678901",
+  "address": "123 Main St",
+  "role": "user",
+  "referralCode": "ABCDEFGH"
+}</code></pre>
+<p><strong>Description:</strong> Creates a new user with the provided details. All fields are validated according to the following rules:
+  <ul>
+    <li><strong>name:</strong> Required. Must be a string with at least 3 characters.</li>
+    <li><strong>email:</strong> Required. Must be a valid email address.</li>
+    <li><strong>age:</strong> Required. Must be a number between 18 and 120.</li>
+    <li><strong>phoneNumber:</strong> Required. Must be in the format +<country code> followed by 7 to 10 digits.</li>
+    <li><strong>address:</strong> Required. Must be a string with at least 10 characters.</li>
+    <li><strong>role:</strong> Optional. Must be one of "user", "admin", or "moderator".</li>
+    <li><strong>referralCode:</strong> Optional. Must be a string of exactly 8 characters if provided.</li>
+  </ul>
+</p>
+<p><strong>Response Example:</strong></p>
+<pre><code>{
+  "id": "66a8af613a37d14451fd46cb",
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "age": 30,
+  "phoneNumber": "+12345678901",
+  "address": "123 Main St",
+  "role": "user",
+  "referralCode": "ABCDEFGH",
+  "status": "created"
+}</code></pre>
+
+
+<h4>2) Get User</h4>
+<p><strong>Endpoint:</strong> <code>/functions/getUser/</code><br>
+   <strong>Method:</strong> GET<br>
+   <strong>Headers:</strong><br>
+   &nbsp;&nbsp;&nbsp;Authorization: Bearer &lt;token&gt;<br>
+   <strong>Description:</strong> Fetches the details of a user based on the provided user ID in the path of the request.</p>
+<p><strong>Response Example:</strong></p>
+<pre><code>{
+  "id": "66a6cf886a84079c40d3ccf1",
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "age": 30,
+  "phoneNumber": "+12345678901",
+  "address": "123 Main St",
+  "role": "user",
+  "referralCode": "ABCDEFGH",
+  "createdAt": "2024-07-28T23:08:56.954Z",
+  "createdBy": "userId123"
+}</code></pre>
+
+
+<h4>3) Update User</h4>
+<p><strong>Endpoint:</strong> <code>/functions/updateUser/id</code><br>
+   <strong>Method:</strong> PUT<br>
+   <strong>Headers:</strong><br>
+   &nbsp;&nbsp;&nbsp;Content-Type: application/json<br>
+   &nbsp;&nbsp;&nbsp;Authorization: Bearer &lt;token&gt;<br>
+   <strong>Body:</strong></p>
+<pre><code>{
+  "name": "John Smith",
+  "email": "johnsmith@example.com",
+  "age": 31,
+  "phoneNumber": "+1234567890",
+  "address": "456 Elm Stanciya Zavodskaya",
+  "role": "user",
+  "referralCode": "ABCDEFGH"
+}</code></pre>
+<p><strong>Description:</strong> Updates the details of the user with the specified ID. Only fields provided in the request body will be updated.</p>
+<p><strong>Response Example:</strong></p>
+<pre><code>{
+  "id": "66a8af613a37d14451fd46cb",
+  "name": "John Smith",
+  "email": "johnsmith@example.com",
+  "age": 31,
+  "phoneNumber": "+1234567890",
+  "address": "456 Elm Stanciya Zavodskaya",
+  "role": "user",
+  "referralCode": "ABCDEFGH",
+  "status": "updated"
+}</code></pre>
+
+
+                <h4>4) Delete User</h4>
+                <p><strong>Endpoint:</strong> <code>/functions/deleteUser/id</code><br>
+                   <strong>Method:</strong> DELETE<br>
+                   <strong>Headers:</strong><br>
+                   &nbsp;&nbsp;&nbsp;Authorization: Bearer &lt;token&gt;<br>
+                   <strong>Description:</strong> Deletes the user with the specified ID.</p>
+                <p><strong>Response Example:</strong></p>
+                <pre><code>{
+  "id": "66a8af613a37d14451fd46cb",
+  "status": "deleted"
+}</code></pre>
+
+<h4>5) Check User Status</h4>
+<p><strong>Endpoint:</strong> <code>/functions/checkUserStatus/id</code><br>
+   <strong>Method:</strong> GET<br>
+   <strong>Headers:</strong><br>
+   &nbsp;&nbsp;&nbsp;Authorization: Bearer &lt;token&gt;<br>
+   <strong>Description:</strong> Checks the status of the user with the specified ID.</p>
+<p><strong>Response Example:</strong></p>
+<pre><code>{
+  "id": "66bdf87ccb9af82b5c6bb0c7",
+  "name": "John Smith2",
+  "email": "johnsmith@example.com",
+  "createdAt": "2024-08-15T12:45:48.389Z",
+  "createdBy": "106672135669461508399",
+  "status": "created"
+}</code></pre>
+
+
+<h4>6) Get Users</h4>
+<p><strong>Endpoint:</strong> <code>/functions/getUsers</code><br>
+   <strong>Method:</strong> GET<br>
+   <strong>Headers:</strong><br>
+   &nbsp;&nbsp;&nbsp;Authorization: Bearer &lt;token&gt;<br>
+   <strong>Description:</strong> Fetches a paginated list of users with details.</p>
+<p><strong>Query Parameters:</strong><br>
+   &nbsp;&nbsp;&nbsp;<code>page</code>: integer (optional, default is 1) - The page number to fetch.<br>
+   &nbsp;&nbsp;&nbsp;<code>limit</code>: integer (optional, default is 10) - The number of users per page.</p>
+<p><strong>Response Example:</strong></p>
+<pre><code>{
+  "users": [
+    {
+      "_id": "66be06e622bc55e9f50eda9e",
+      "name": "John Doe",
+      "email": "johnwqeqwedsadoe@example.com",
+      "age": 30,
+      "phoneNumber": "+12345678901",
+      "address": "123 Main St",
+      "role": "user",
+      "referralCode": "ABCDEFGH",
+      "createdAt": "2024-08-15T13:47:18.358Z",
+      "createdBy": "116031199557096350440",
+      "status": "created"
+    }
+  ],
+  "totalPages": 21
+}</code></pre>
+
+
+            <div class="section order-section">
+                <h3>Order Endpoints</h3>
+
+ <h4>7) Create Order</h4>
+<p><strong>Endpoint:</strong> <code>/functions/createOrder</code><br>
+<strong>Method:</strong> POST<br>
+<strong>Headers:</strong><br>
+&nbsp;&nbsp;&nbsp;Content-Type: application/json<br>
+&nbsp;&nbsp;&nbsp;Authorization: Bearer &lt;token&gt;<br>
+<strong>Body:</strong></p>
+<pre><code>{
+  "userId": "66bdefd19f070f4577306959",
+  "orderId": "order123", // Новый параметр для заказа
+  "items": [
+    {"productId": "555", "quantity": 15},
+    {"productId": "789", "quantity": 10}
+  ],
+  "totalAmount": 150.75,
+  "paymentMethod": "credit_card",
+  "shippingAddress": "123 Shipping St, Shipville, SH",
+  "deliveryDate": "2024-08-20T00:00:00.000Z",
+  "discountCode": "SUMMER2024",
+  "notes": "Please deliver between 9 AM and 5 PM",
+  "status": "created"
+}</code></pre>
+<p><strong>Description:</strong> Creates a new order for the specified user. The order includes items, total amount, payment method, shipping address, delivery date, optional discount code, notes, and status. The `orderId` must be provided and must be unique. The function checks if the `userId` exists before creating the order.</p>
+<p><strong>Response Example:</strong></p>
+<pre><code>{
+  "id": "66a8b5d29e5301066c2b9167",
+  "orderId": "order123", // Включаем orderId в ответ
+  "userId": "66bdefd19f070f4577306959",
+  "items": [
+    {"productId": "555", "quantity": 15},
+    {"productId": "789", "quantity": 10}
+  ],
+  "totalAmount": 150.75,
+  "paymentMethod": "credit_card",
+  "shippingAddress": "123 Shipping St, Shipville, SH",
+  "deliveryDate": "2024-08-20T00:00:00.000Z",
+  "discountCode": "SUMMER2024",
+  "notes": "Please deliver between 9 AM and 5 PM",
+  "status": "created",
+  "createdAt": "2024-08-15T00:00:00.000Z",
+  "createdBy": "user456"
+}</code></pre>
+
+<h4>7) Create Order</h4>
+<p><strong>Endpoint:</strong> <code>/functions/createOrder</code><br>
+<strong>Method:</strong> POST<br>
+<strong>Headers:</strong><br>
+&nbsp;&nbsp;&nbsp;Content-Type: application/json<br>
+&nbsp;&nbsp;&nbsp;Authorization: Bearer &lt;token&gt;<br>
+<strong>Body:</strong></p>
+<pre><code>{
+  "userId": "66bdefd19f070f4577306959",
+  "orderId": "order123", // Новый параметр для заказа
+  "items": [
+    {"productId": "555", "quantity": 15},
+    {"productId": "789", "quantity": 10}
+  ],
+  "totalAmount": 150.75,
+  "paymentMethod": "credit_card",
+  "shippingAddress": "123 Shipping St, Shipville, SH",
+  "deliveryDate": "2024-08-20T00:00:00.000Z",
+  "discountCode": "SUMMER2024",
+  "notes": "Please deliver between 9 AM and 5 PM",
+  "status": "created"
+}</code></pre>
+<p><strong>Description:</strong> Creates a new order for the specified user. The order includes items, total amount, payment method, shipping address, delivery date, optional discount code, notes, and status. The `orderId` must be provided and must be unique. The function checks if the `userId` exists before creating the order.</p>
+<p><strong>Response Example:</strong></p>
+<pre><code>{
+  "id": "66be31e7980aeb950d8b0c6c",
+  "orderId": "order123", // Включаем orderId в ответ
+  "userId": "66bdefd19f070f4577306959",
+  "items": [
+    {"productId": "555", "quantity": 15},
+    {"productId": "789", "quantity": 10}
+  ],
+  "totalAmount": 150.75,
+  "paymentMethod": "credit_card",
+  "shippingAddress": "123 Shipping St, Shipville, SH",
+  "deliveryDate": "2024-08-20T00:00:00.000Z",
+  "discountCode": "SUMMER2024",
+  "notes": "Please deliver between 9 AM and 5 PM",
+  "status": "created",
+  "createdAt": "2024-08-15T00:00:00.000Z",
+  "createdBy": "user456"
+}</code></pre>
+
+
+<h4>8) Get Order</h4>
+<p><strong>Endpoint:</strong> <code>/functions/getOrder/{orderId}</code><br>
+   <strong>Method:</strong> GET<br>
+   <strong>Headers:</strong><br>
+   &nbsp;&nbsp;&nbsp;Authorization: Bearer &lt;token&gt;<br>
+   <strong>Description:</strong> Fetches the details of a specific order by its <code>orderId</code>.</p>
+<p><strong>Query Parameters:</strong><br>
+   &nbsp;&nbsp;&nbsp;<code>orderId</code>: string (required) — The unique identifier of the order you want to retrieve.</p>
+<p><strong>Response Example:</strong></p>
+<pre><code>{
+  "id": "66be0ca1a4c9dd88ce6e9d0f",
+  "items": [
+    {
+      "productId": "555",
+      "quantity": 15
+    },
+    {
+      "productId": "789",
+      "quantity": 10
+    }
+  ],
+  "totalAmount": 150.75,
+  "paymentMethod": "credit_card",
+  "shippingAddress": "123 Shipping St, Shipville, SH",
+  "deliveryDate": "2024-08-20T00:00:00.000Z",
+  "discountCode": "SUMMER2024",
+  "notes": "Please deliver between 9 AM and 5 PM",
+  "status": "created",
+  "createdAt": "2024-08-01T12:00:00.000Z",
+  "createdBy": "user1234"
+}</code></pre>
+<p><strong>Description:</strong> Fetches detailed information about a specific order, including the order ID, all items, payment method, shipping details, and order status.</p>
+
+
+
+
+<h4>9) Delete Order</h4>
+<p><strong>Endpoint:</strong> <code>/functions/deleteOrder/66a6f5dfe0fbe00018841dc3</code><br>
+   <strong>Method:</strong> DELETE<br>
+   <strong>Headers:</strong><br>
+   &nbsp;&nbsp;&nbsp;Authorization: Bearer &lt;token&gt;<br>
+   <strong>Description:</strong> Deletes the order with the specified ID.</p>
+<p><strong>Response Example:</strong></p>
+<pre><code>{
+  "id": "66a6f5dfe0fbe00018841dc3",
+  "status": "deleted"
+}</code></pre>
+
+
+<h4>10) Get User Orders</h4>
+<p><strong>Endpoint:</strong> <code>/functions/getUserOrders/{userId};</code><br>
+<strong>Method:</strong> GET<br>
+<strong>Headers:</strong><br>
+&nbsp;&nbsp;&nbsp;Authorization: Bearer &lt;token&gt;<br>
+<strong>Description:</strong> Fetches all orders for the user with the specified ID.</p>
+<p><strong>Response Example:</strong></p>
+<pre><code>[
+  {
+    "id": "66be1298676ec90c02268b23",
+    "orderId": "order127",
+    "userId": "user456",
+    "items": [
+      {"productId": "555", "quantity": 15},
+      {"productId": "789", "quantity": 10}
+    ],
+    "totalAmount": 150.75,
+    "paymentMethod": "credit_card",
+    "shippingAddress": "123 Shipping St, Shipville, SH",
+    "deliveryDate": "2024-08-20T00:00:00.000Z",
+    "discountCode": "SUMMER2024",
+    "notes": "Please deliver between 9 AM and 5 PM",
+    "status": "created"
+  }
+]</code></pre>
+
+
+<h4>11) Create Review</h4>
+<p><strong>Endpoint:</strong> <code>/functions/createReview</code><br>
+<strong>Method:</strong> POST<br>
+<strong>Headers:</strong><br>
+&nbsp;&nbsp;&nbsp;Content-Type: application/json<br>
+&nbsp;&nbsp;&nbsp;Authorization: Bearer &lt;token&gt;<br>
+<strong>Body:</strong></p>
+<pre><code>{
+  "rating": 5,
+  "comment": "Excellent product!",
+  "timestamp": "2024-07-27T12:00:00Z",
+  "orderId": "789123",
+  "recommendToOthers": true,
+  "quality": 4,
+  "service": 5,
+  "photo": "data:image/png;base64,iVBORw0K..."
+}</code></pre>
+<p><strong>Description:</strong> Creates a new review for the specified order. The review includes additional details such as the recommendation status, quality rating, service rating, and an optional photo (PNG, max 1MB, 512x512). The function validates if the `orderId` exists before creating the review.</p>
+<p><strong>Response Example:</strong></p>
+<pre><code>{
+  "id": "66be344c93b4b6bb695ad13f",
+  "orderId": "789123",
+  "rating": 5,
+  "comment": "Excellent product!",
+  "timestamp": "2024-07-27T12:00:00Z",
+  "recommendToOthers": true,
+  "quality": 4,
+  "service": 5,
+  "photo": "data:image/png;base64,iVBORw0K...",
+  "status": "created"
+}</code></pre>
+
+                <h4>12) Get Reviews</h4>
+                <p><strong>Endpoint:</strong> <code>/functions/getReviews</code><br>
+                   <strong>Method:</strong> GET<br>
+                   <strong>Headers:</strong><br>
+                   &nbsp;&nbsp;&nbsp;Authorization: Bearer &lt;token&gt;<br>
+                   <strong>Description:</strong> Fetches a list of reviews with pagination.</p>
+                <p><strong>Query Parameters:</strong><br>
+                   &nbsp;&nbsp;&nbsp;<code>page</code>: integer (optional, default is 1)<br>
+                   &nbsp;&nbsp;&nbsp;<code>limit</code>: integer (optional, default is 10)</p>
+                <p><strong>Response Example:</strong></p>
+                <pre><code>{
+  "reviews": [
+    {
+      "_id": "66a4fa7a2a5ec430115deed2",
+      "productId": "567",
+      "userId": "3",
+      "rating": 5,
+      "comment": "Excellent product!",
+      "createdAt": "2024-07-27T13:47:38.289Z",
+      "createdBy": 81509547
+    }
+  ],
+  "totalPages": 11
+}</code></pre>
+            </div>
+
+            <h3>Errors</h3>
+            <p><strong>Common Error Responses:</strong></p>
+            <pre><code>{
+  "401": {"error": "Invalid or expired token"},
+  "404": {"error": "Resource not found"},
+  "409": {"error": "This ID already exists"},
+  "500": {"error": "Internal Server Error"},
+  "502": {"error": "Gateway timeout"}
+}</code></pre>
+        </div>
+
+        <div id="tokenModal" class="modal">
+            <div class="modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <h2>JWT Token</h2>
+                <p id="jwtToken"></p>
+                <button id="copyButton">Copy Token</button>
+            </div>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>

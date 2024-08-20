@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DummyAPI</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Info Note */
+        .info-note {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный фон */
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            width: 250px;
+        }
+        .info-note h4 {
+            margin: 0 0 10px;
+            font-size: 16px;
+        }
+        .info-note .close-info-note {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            color: #fff;
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        
+        /* New Style for the "Donate for Coffee and Hosting" text */
+        .hosting-coffee-coverage {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #1abc9c, #9b59b6); /* Градиент от бирюзового к фиолетовому */
+            border: 2px solid transparent;
+            background-clip: padding-box, border-box;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title-container">
+            <h1 class="title slide-in-left">DUMMY API</h1>
+            <img src="./qr_code.png" alt="Bitcoin Donation QR Code" class="qr-code">
+            <p class="hosting-coffee-coverage">Donate for Coffee and Hosting</p>
+        </div>
+
+        <div class="auth-social-buttons">
+            <a href="https://t.me/Testing_and_iTech" class="social-button telegram">Telegram</a>
+            <a href="https://www.youtube.com/@AlexQA" class="social-button youtube">YouTube</a>
+            <a href="https://www.linkedin.com/in/alexandr-maleiko-605251161/" class="social-button linkedin">LinkedIn</a>
+            <button id="githubLoginBtn" class="auth-button github-login">Login with GitHub</button>
+            <button id="googleLoginBtn" class="auth-button google-login">Login with Google</button>
+        </div>
+
+        <div class="button-container">
+            <!-- Верхний ряд кнопок -->
+            <button id="button1" class="button">Home</button>
+            <button id="button2" class="button">Documentation</button>
+            <button id="button3" class="button">User List</button>
+            <button id="button4" class="button">Order List</button>
+            <button id="button6" class="button">Review List</button>
+            <button id="button5" class="button">Resources</button>
+        </div>
+        
+        <div class="button-container">
+            <!-- Нижний ряд кнопок с новыми классами -->
+            <button id="button7" class="custom-button button-rest">REST</button>
+            <button id="button8" class="custom-button button-graphql">GraphQL</button>
+            <button id="button9" class="custom-button button-grpc">gRPC</button>
+            <button id="button10" class="custom-button button-websocket">WebSocket</button>
+        </div>
+        
+        
+
+        <div id="content" class="content">
+            <!-- Контент будет обновляться здесь на основе нажатий кнопок -->
+        </div>
+
+        <div id="tokenModal" class="modal">
+            <div class="modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <h2>JWT Token</h2>
+                <p id="jwtToken"></p>
+                <button id="copyButton" class="copy-button">Copy Token</button>
+            </div>
+        </div>
+
+        <div id="infoNote" class="info-note">
+            <button class="close-info-note" onclick="closeInfoNote()">×</button>
+            <h4>Build 1.7.1</h4>
+            <p>-new background is added</p>
+            <p>updated: 20.08</p>
+            <p>Report issues/improvements in <a href="https://t.me/Testing_and_iTech" style="color: #66ccff;">Telegram</a></p>
+        </div>
+    </div>
+    <script>
+        function closeInfoNote() {
+            document.getElementById('infoNote').style.display = 'none';
+        }
+        
+        document.getElementById('button4').addEventListener('click', function() {
+            loadOrderList();
+        });
+
+        document.getElementById('button6').addEventListener('click', function() {
+            loadReviewList();
+        });
+
+        function loadOrderList() {
+            fetch('order-list.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('content').innerHTML = html;
+                })
+                .catch(error => console.error('Ошибка загрузки страницы заказов:', error));
+        }
+
+        function loadReviewList() {
+            fetch('review-list.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('content').innerHTML = html;
+                })
+                .catch(error => console.error('Ошибка загрузки страницы отзывов:', error));
+        }
+
+        // Существующий код в scripts.js
+
+        // Добавьте этот код в самом конце файла
+        document.getElementById('buttonRest').addEventListener('click', function() {
+            loadPage('rest.html');
+        });
+
+        document.getElementById('buttonGraphQL').addEventListener('click', function() {
+            loadPage('graphql.html');
+        });
+
+        document.getElementById('buttongRPC').addEventListener('click', function() {
+            loadPage('grpc.html');
+        });
+
+        document.getElementById('buttonWebSocket').addEventListener('click', function() {
+            loadPage('websocket.html');
+        });
+
+        function loadPage(page) {
+            fetch(page)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('content').innerHTML = html;
+                })
+                .catch(error => console.error('Ошибка загрузки страницы:', error));
+        }
+
+    </script>
+    <script src="scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+functionsDirectory = "/Users/alexmaleiko/dummyapi/netlify/functions"
+functionsDirectoryOrigin = "config-v1"
+headersOrigin = "config"
+redirectsOrigin = "config"
+
+[build]
+publish = "/Users/alexmaleiko/dummyapi/public"
+publishOrigin = "config"
+functions = "/Users/alexmaleiko/dummyapi/netlify/functions"
+
+  [build.environment]
+
+  [build.processing]
+
+    [build.processing.css]
+
+    [build.processing.html]
+
+    [build.processing.images]
+
+    [build.processing.js]
+
+  [build.services]
+
+[dev]
+functions = "netlify/functions"
+publish = "public"
+
+[functions]
+
+  [functions."*"]
+
+[[plugins]]
+package = "@netlify/plugin-functions-install-core"
+origin = "config"
+
+  [plugins.inputs]
+
+[[headers]]
+for = "/*"
+
+  [headers.values]
+  Access-Control-Allow-Origin = "*"
+  Access-Control-Allow-Headers = "Authorization, Content-Type"
+
+[[redirects]]
+from = "/api/*"
+to = "/.netlify/functions/:splat"
+status = 200
+force = true
+
+  [redirects.query]
+
+  [redirects.conditions]
+
+  [redirects.headers]
+
+[[redirects]]
+from = "/auth/google"
+to = "/.netlify/functions/authCallback"
+status = 302
+force = true
+
+  [redirects.query]
+
+  [redirects.conditions]
+
+  [redirects.headers]
+
+[[redirects]]
+from = "/auth/github"
+to = "/.netlify/functions/githubAuth"
+status = 302
+force = true
+
+  [redirects.query]
+
+  [redirects.conditions]
+
+  [redirects.headers]
